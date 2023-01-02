@@ -1,0 +1,80 @@
+<!-- 
+
+<mat-toolbar color="primary" style="font-family: 'Times New Roman', Times, serif;font-size: 25px; font-size: 30px;">
+    Personal Finance Management
+
+    <div>
+        <button (click)="createHome()" mat-button
+            style="color: red; background-color: rgb(249, 234, 248); margin-right: 0.2%; font-size: 12px;">Add
+            Home</button>
+        <button routerLink="/gethomes" mat-raised-button
+            style="color: red; background-color: rgb(249, 234, 248); margin-right: 0.2%;font-size: 12px;">Go to
+            Homes</button>
+        <button (click)="navToExpenseEntry()" mat-raised-button
+            style="color: red; background-color: rgb(249, 234, 248); margin-right: 0.2%;font-size: 12px;">Enter
+            Expense</button>
+        <button mat-raised-button style="color: red;" routerLink="/dashboard/get-expenses">Click to View in Table
+        </button>
+
+        <button mat-raised-button style="color: red; margin-left: 0.2%; background-color: rgb(249, 234, 248);"
+            (click)="getAssignedHomes()" [matMenuTriggerFor]="menu2">Your Assigned Homes</button>
+        <mat-menu #menu2="matMenu">
+            <p *ngIf="showNoHomes2" style="font-family: 'Times New Roman', Times, serif; color: rgb(72, 2, 11);">
+                No Homes Assigned to You
+            </p>
+            <button mat-menu-item *ngFor="let x of assignedHomes"
+                (click)="getExpensesByHomeId(x.id, x.description)">{{x.description}}</button>
+        </mat-menu>
+    </div>
+</mat-toolbar> -->
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid" style="margin-top: 1%;">
+        <div class="navbar-header">
+            <p class="my" style="margin-top: 5%;">Personal Finance Management</p>
+        </div>
+        <ul class="nav navbar-nav" style="margin-left: 10%;">
+            <li class="myLink"><a (click)="createHome()" style="color: rgb(254, 254, 254); cursor: pointer;">Add Home</a></li>
+            <li><a routerLink="/gethomes" style="color: rgb(254, 254, 254); cursor: pointer;">Go To Homes</a></li>
+            <li><a (click)="navToExpenseEntry()" *ngIf="views" style="color: rgb(254, 254, 254); cursor: pointer;">Enter Expense</a>
+            </li>
+            <li><a routerLink="/dashboard/get-expenses" style="color: rgb(254, 254, 254);">View in Table</a></li>
+            <li><a routerLink="/dashboard/view-expenses" style="color: rgb(254, 254, 254);cursor: pointer;">View in
+                    Graph</a></li>
+            <li><a style="color: rgb(254, 254, 254);cursor: pointer;" (click)="getAssignedHomes()"
+                    [matMenuTriggerFor]="menu2">Your Assigned Homes</a></li>
+            <mat-menu #menu2="matMenu">
+                <p *ngIf="showNoHomes2" style="font-family: 'Times New Roman', Times, serif; color: rgb(72, 2, 11);">
+                    No Homes Assigned to You
+                </p>
+                <button mat-menu-item *ngFor="let x of assignedHomes"
+                    (click)="getExpensesByHomeId(x.id, x.description)">{{x.description}}</button>
+            </mat-menu>
+        </ul>
+    </div>
+</nav>
+
+<!-- <button (click)="createHome()" mat-raised-button style="color: red;">Add Home</button> -->
+<router-outlet></router-outlet>
+
+
+
+
+
+
+<!-- <button routerLink={{link}} (click)="changeLink()" mat-button
+            style="color: red; background-color: rgb(249, 234, 248); margin-right: 0.2%; font-size: 12px;">View Expenses in
+            {{name}}</button> -->
+
+<!-- <button mat-raised-button style="color: red; font-size: 12px; background-color: rgb(249, 234, 248);"
+            (click)="getAssignedToHomes()" [matMenuTriggerFor]="menu">This
+            Home Assigned To</button>
+        <mat-menu #menu="matMenu">
+            <p *ngIf="showNoHomes" style="font-family: 'Times New Roman', Times, serif; color: rgb(72, 2, 11);">
+                Not Assigned Yet
+            </p>
+            <button mat-menu-item *ngFor="let home of assignedToHomes" [disabled]="disableUpdateRole"
+                (click)="updateRole(home.role, home.homeId, home.email, home.roleId, home.userId)">{{home.name +"-"+
+                home.role}} (Click to Change
+                Role)</button>
+        </mat-menu> -->

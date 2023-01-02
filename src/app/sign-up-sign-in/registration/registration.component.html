@@ -1,0 +1,79 @@
+<mat-toolbar color="primary" style="font-family: 'Times New Roman', Times, serif;font-size: 25px; font-size: 30px;">
+  Personal Finance Management
+</mat-toolbar>
+<div>
+    <mat-card>
+        <mat-card-title>Register User</mat-card-title>
+        <br>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="registerUser()">
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Username" formControlName="name">
+        </mat-form-field>
+        <p style="color: red;" *ngIf="Name && Name.invalid && (Name.touched || Name.dirty)">
+          Please Enter Your Name
+        </p>
+      <!-- </p> -->
+
+      <p>
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <p style="color: red;" *ngIf="Email && Email.invalid && (Email.touched || Email.dirty)">
+          Enter Proper Email
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+        <div>
+        <small style="color: red;" *ngIf="Password && Password.invalid && (Password.touched || Password.dirty)">
+          <div *ngIf="Password.hasError('required')">
+            password is required
+          </div>
+          <div class="error-text" *ngIf="Password.hasError('passwordStrength')">
+            {{Password.errors?.['passwordStrength']}}
+            <!-- Password Should Consists of Upper,Lower case And Special Characters -->
+          </div>
+        </small>
+      </div>
+      <!-- </p> -->
+      <p>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Phone" formControlName="phone">
+        </mat-form-field>
+        <p style="color: red;" *ngIf="PhoneNo && PhoneNo.invalid && (PhoneNo.touched || PhoneNo.dirty)">
+          Please Enter Phone Number
+      </p>
+      
+
+      <!-- <div class="errors" *ngIf="Password && Password.invalid && (Password.touched || Password.dirty)">
+        <div *ngIf="Password.hasError('required')">
+          password is required
+        </div>
+        <div class="error-text" *ngIf="Password.hasError('passwordStrength')">
+          {{Password.errors['passwordStrength']}}
+        </div>
+      </div> -->
+      <!-- <p *ngIf="error" class="error">
+        {{ error }}
+      </p> -->
+
+      <div class="example-label">
+        <button type="submit" mat-raised-button [disabled]="form.invalid" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;background-color: rgb(243, 182, 247); font-size: large;">Register</button>
+        <p style="color: red;" *ngIf = "errorMessage">
+          {{errorMessage}}
+        </p>
+        <button routerLink="/login" mat-raised-button style="margin-left: 56%;">Go To Login Page</button>
+        <!-- <button *ngIf="enableLogin" mat-raised-button style="margin-left: 24.5%;">Go To Login Page</button> -->
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+<br>
+</div>
+
+<!-- <p>{{errorMessage}}</p> -->
+

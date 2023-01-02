@@ -1,0 +1,13 @@
+.mat-toolbar {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.5rem;
+    width: 100%;
+    background-color: rgb(179, 85, 172);
+  }
+
+  h2 {
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(14, 110, 110);
+  }

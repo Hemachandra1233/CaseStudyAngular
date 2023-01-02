@@ -1,0 +1,76 @@
+<!-- <button mat-raised-button color="primary" style="width: 10%; align-self:flex-end;">Create New Home</button> -->
+
+<!-- <button mat-raised-button style="color: red; font-size: 12px; background-color: rgb(249, 234, 248);"
+            (click)="getAssignedToHomes()" [matMenuTriggerFor]="menu">This
+            Home Assigned To</button>
+        <mat-menu #menu="matMenu">
+            <p *ngIf="showNoHomes" style="font-family: 'Times New Roman', Times, serif; color: rgb(72, 2, 11);">
+                Not Assigned Yet
+            </p>
+            <button mat-menu-item *ngFor="let home of assignedToHomes" [disabled]="disableUpdateRole"
+                (click)="updateRole(home.role, home.homeId, home.email, home.roleId, home.userId)">{{home.name +"-"+
+                home.role}} (Click to Change
+                Role)</button>
+        </mat-menu> -->
+
+<mat-toolbar color="primary" style="font-family: 'Times New Roman', Times, serif;font-size: 25px;">
+    Personal Finance Management
+
+    <button (click)="openCreateHome()" mat-button
+        style="color: red; background-color: rgb(252, 232, 252); margin-right: 0.2%; font-size: 12px;">Create New
+        Home</button>
+    <!-- <span class="material-symbols-outlined">
+                group
+                </span> -->
+</mat-toolbar>
+<div style="width: 60%; align-self: center;">
+    <mat-card>
+        <div>
+            <mat-card-title style="margin-right: 10%; color:brown; font-family: 'Times New Roman', Times, serif;">Your
+                Homes</mat-card-title>
+            <br>
+            <div *ngFor="let homes of x ">
+                <p style="margin-left: 8%;">
+                <div style="display: flex;">
+
+                    <button mat-raised-button *ngIf="homes.showUpdate" 
+                         style="width: 90%; background-color: rgb(125, 226, 248);"
+                        (click)="getExpensesByHomeId(homes.id, homes.description)">{{homes.description}}</button>
+                    <button mat-raised-button *ngIf="!homes.showUpdate"
+                    style="width: 90%; background-color: rgb(241, 114, 114); "
+                    (click)="getExpensesByHomeId(homes.id, homes.description)">{{homes.description}}</button>
+
+                    <button [disabled]="!homes.showUpdate" mat-raised-button
+                        style="color: rgb(212, 36, 42); margin-left: 2%;"
+                        (click)="updateHome(homes.id, homes.description)">Update</button>
+
+                    <button class="material-symbols-outlined btn" [disabled]="!homes.showUpdate" style="margin-left: 2%;"
+                        (click)="assignHome(homes.id)">person_add</button>
+
+                    <button [disabled]="!homes.showUpdate" class="material-icons" mat-raised-icon
+                        (click)="onDelete(homes.id, homes.description)"
+                        style="margin-left: 2%; background-color: rgb(247, 156, 156); cursor: pointer;">delete</button>
+                    <button class="material-symbols-outlined btn" (click)="getAssignedToHomes(homes.id)" style="margin-left: 2%;"
+                        [matMenuTriggerFor]="menu">group</button>
+                    <mat-menu #menu="matMenu">
+                        <p *ngIf="showNoHomes"
+                            style="font-family: 'Times New Roman', Times, serif; color: rgb(72, 2, 11);">
+                            This Home is not Assigned Yet
+                        </p>
+                        <button mat-menu-item *ngFor="let home of assignedToHomes" [disabled]="disableUpdateRole"
+                            (click)="updateRole(home.role, home.homeId, home.email, home.roleId, home.userId)">{{home.name
+                            +"-"+
+                            home.role}} (Click to Change
+                            Role)</button>
+                    </mat-menu>
+                </div>
+                <!-- </p> -->
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+
+<!-- <button mat-raised-button [color]="color" (mouseover)="color = 'warn'"
+                        (mouseout)="color = 'primary'" style="width: 90%;"
+                        (click)="getExpensesByHomeId(homes.id, homes.description)">{{homes.description}}</button> -->

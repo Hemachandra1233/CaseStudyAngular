@@ -1,0 +1,60 @@
+/* mat-grid-tile {
+    background: lightblue;
+  } */
+  .mat-toolbar {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 6.5rem;
+    width: 100%;
+    background-color: rgb(179, 85, 172);
+  }
+
+  /* :host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+    margin-top: 1%;
+  } */
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+  button.mat-raised-button:hover {
+    background-color: rgb(161, 239, 239);
+  }
+  mat-card{
+    margin-top: 8%;
+    /* display: flex; */
+    justify-content: center;
+    margin: 100px 0px;
+    /* margin-top: 3%; */
+    margin-left: 30%;
+  }
+  
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+  
+}
+/* button {
+  cursor: pointer;
+} */
+.btn {
+  background-color: rgb(182, 167, 243);
+  /* border: none; */
+  color: white;
+  /* padding: 12px 16px;
+  font-size: 16px; */
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+

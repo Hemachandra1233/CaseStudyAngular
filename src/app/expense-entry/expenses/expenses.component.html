@@ -1,0 +1,159 @@
+<!-- <mat-toolbar color="primary" style="font-family: 'Times New Roman', Times, serif;font-size: 25px;">
+  Personal Finance Management
+
+  <div>
+    <button mat-button style="color: red; background-color: aliceblue;">Add Home</button>
+    <button routerLink="/gethomes" mat-raised-button
+      style="color: red; margin-left: 0.2%; background-color: aliceblue;">Go to Homes</button>
+    <button mat-button style="color: red; background-color: aliceblue; margin-left: 0.2%;"
+      (click)="navtoFileUpload()">Upload Document of Expense</button>
+    <button mat-button style="color: red; background-color: aliceblue; margin-left: 0.2%;"
+      (click)="navtoFileDownload()">Download Documents of Expense</button>
+  </div>
+</mat-toolbar> -->
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid" style="margin-top: 1%;">
+    <div class="navbar-header">
+      <a class="navbar-brand my">Personal Finance Management</a>
+    </div>
+    <ul class="nav navbar-nav" style="margin-left: 20%;">
+      <li><a routerLink="/gethomes" style="color: rgb(254, 254, 254); cursor: pointer;">Add Home</a></li>
+      <li><a routerLink="/dashboard/view-expenses" style="color: rgb(254, 254, 254); cursor: pointer;">Go To
+          Dashboard</a></li>
+      <li><a routerLink="/dashboard/get-expenses" style="color: rgb(254, 254, 254);">View in Table</a></li>
+      <li><a routerLink="/gethomes" style="color: rgb(254, 254, 254); cursor: pointer;">Go to Homes</a></li>
+      <li><a *ngIf="showUpdateButton" (click)="navtoFileUpload()" style="color: rgb(254, 254, 254); cursor: pointer;">Upload Documents</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div>
+  <mat-card>
+    <mat-card-title *ngIf="!showUpdateButton" style="font-family: 'Times New Roman', Times, serif;">Expense Entry
+    </mat-card-title>
+    <mat-card-title *ngIf="showUpdateButton" style="font-family: 'Times New Roman', Times, serif;">Update Expense
+    </mat-card-title>
+    <br>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <div>
+          <div style="display:flex ;">
+            <div>
+              <mat-form-field>
+                <mat-label>Choose start date</mat-label>
+                <input matInput [matDatepicker]="picker" matInput placeholder="Date" formControlName="transactionDate">
+                <mat-datepicker-toggle matSuffix [for]="picker" style="display: inline;"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <p style="color: red;" *ngIf="Date && Date.invalid && Date.touched">Please Enter
+                Date
+              </p>
+            </div>
+            <div>
+              <div style="display: flex;">
+                <mat-form-field appearance="fill" style="margin-left: 5%;">
+                  <mat-label>Choose a Category</mat-label>
+                  <mat-select matNativeControl formControlName="categoryId">
+                    <!-- <mat-option>
+                      <button mat-button (click)="createCategory()">Add Category</button>
+                    </mat-option> -->
+                    <mat-option [value]="cat.id" *ngFor="let cat of Categories">
+                      {{cat.description}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-icon style="margin-top: 5%; cursor: pointer;" (click)="addCat()">add_circle</mat-icon>
+              </div>
+              <p style="color: red; margin-left: 5%;" *ngIf="CatId && CatId.invalid && CatId.touched">Please Select a
+                Category
+              </p>
+            </div>
+          </div>
+          <div style="display:flex ;">
+            <div>
+              <mat-form-field>
+                <input type="number" matInput placeholder="Amount" formControlName="amount">
+              </mat-form-field>
+              <p style="color: red;" *ngIf="Amount && Amount.invalid && Amount.touched">Please Enter Amount
+              </p>
+            </div>
+            <div>
+              <mat-form-field appearance="legacy" style="margin-left: 5%;">
+                <input type="text" matInput placeholder="Description" formControlName="description">
+              </mat-form-field>
+              <p style="color: red; margin-left: 5%;" *ngIf="Description && Description.invalid && Description.touched">
+                Please Enter
+                Description
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex;">
+            <div>
+              <mat-form-field appearance="fill">
+                <mat-label>Choose a SpendType</mat-label>
+                <mat-select formControlName="spendTypeId">
+                  <mat-option [value]="spend.id" *ngFor="let spend of SpendTypes">
+                    {{spend.type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <p style="color: red; margin-left: 5%;" *ngIf="SpendId && SpendId.invalid && SpendId.touched">Please
+                Select a Category
+              </p>
+            </div>
+            <div>
+              <mat-form-field appearance="fill" style="margin-left: 5%;">
+                <mat-label>Choose To Whom</mat-label>
+                <mat-select formControlName="expenseTo">
+                  <mat-option [value]="expTo" *ngFor="let expTo of expensesTo">
+                    {{expTo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <p style="color: red; margin-left: 5%;" *ngIf="ExpenseTo && ExpenseTo.invalid && ExpenseTo.touched">Please
+                Select
+                Expense
+                To
+              </p>
+            </div>
+          </div>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Choose a Transaction Type</mat-label>
+              <mat-select formControlName="transactionTypeId">
+                <!-- <mat-select-trigger>{{Expense}}</mat-select-trigger> -->
+                <mat-option [value]="type.id" *ngFor="let type of TransactionTypes">
+                  {{type.description}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p style="color: red;" *ngIf="TransactionTypeId && TransactionTypeId.invalid && TransactionTypeId.touched">
+              Please Select a
+              Transaction Type
+            </p>
+          </div>
+          <div>
+            <div class="button" style="display: flex;">
+              <button *ngIf="!showUpdateButton" style="width: 30%;" type="submit" mat-raised-button
+                (click)="expenseEntry()">Submit</button>
+              <button *ngIf="showUpdateButton" style="width: 30%;" type="submit" mat-raised-button
+                (click)="updateExpense()">Update</button>
+              <!-- <button style=" margin-left: 20%;" type="submit" mat-raised-button
+                routerLink="/dashboard/view-expenses">Go To Dashboard</button>   -->
+
+                <div *ngIf="showDocuments">
+                  <button mat-raised-button style="margin-left: 2%;"
+                    (click)="navtoFileUpload()">Upload Document of Expense</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <button mat-raised-button color="primary" style="margin-left: 2%;" (click)="navtoFileDownload()">Download Documents
+  of Expense</button> -->

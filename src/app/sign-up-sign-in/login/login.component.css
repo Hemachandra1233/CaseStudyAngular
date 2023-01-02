@@ -1,0 +1,59 @@
+.mat-toolbar {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 6.5rem;
+  width: 100%;
+  background-color: rgb(179, 85, 172);
+}
+
+/* :host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+    margin-top: 13%;
+  } */
+
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+    
+  }
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+    font-style: italic;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  mat-card {
+    background:rgb(243, 209, 214);
+    font-family: 'Serif', Georgia, monospace;
+    justify-content: center;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 10%;
+  }
+  hero {
+    background-color: aquamarine;
+  }

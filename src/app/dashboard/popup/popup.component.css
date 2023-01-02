@@ -1,0 +1,34 @@
+/* .pop{
+    color:rgb(66, 29, 2);
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+} */
+
+/* mat-confirm-dialog (customised dialog) */
+.mat-dialog-container {
+    border-radius: .25em .25em .4em .4em;
+    padding: 0px;
+}
+.content-container{
+    margin: 5px 5px 15px 5px;
+    color: #8f9cb5;
+    display: flex;
+}
+#close-icon{
+    margin-left: auto;
+    order: 2;
+    font-weight: bolder;
+}
+#close-icon:hover{
+cursor: pointer;
+}
+
+/* .content-container {
+    margin: 5px 5px 15px 5px;
+    color: #8f9cb5;
+    display: flex;
+}
+.mat-dialog-container {
+    border-radius: .25em .25em .4em .4em;
+    padding: 0px;
+} */

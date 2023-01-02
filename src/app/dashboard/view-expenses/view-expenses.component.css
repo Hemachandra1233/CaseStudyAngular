@@ -1,0 +1,27 @@
+.graph {   
+    margin-left: 22%;
+    margin-right: 22%;
+    margin-bottom: 22%;
+}
+h1 {
+    font-size: 30px;
+    font-family: serif;
+    color: #5d1280;
+    text-align: center;
+    /* animation: animate 
+        2.5s linear infinite; */
+}
+
+/* @keyframes animate {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+    }
+} */

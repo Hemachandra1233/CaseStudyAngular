@@ -1,0 +1,72 @@
+.mat-toolbar {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.0rem;
+  width: 100%;
+  background-color: rgb(179, 85, 172);
+}
+
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+
+  .button {
+    display: centre;
+    /* justify-content: flex-end; */
+    margin-left: 25%;
+    width: 100%;
+  }
+
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  mat-card {
+    justify-content: center;
+    margin: 100px 0px;
+    background:rgb(243, 209, 214);
+    font-family: 'Serif', Georgia, monospace;
+    /* width: 110%; */
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 7%;
+  }
+
+nav {
+    align-items: center;
+    justify-content: space-between;
+    height: 7.0rem;
+    width: 100%;
+    background-color: rgb(179, 85, 172);
+}
+a {
+  color: aliceblue;
+}
+.my {
+  color: white;
+  font-size: 180%;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+li:hover{
+  background-color:rgb(214, 163, 210);
+  padding: auto;
+  border-radius: 10%;
+}

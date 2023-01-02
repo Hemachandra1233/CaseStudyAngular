@@ -1,0 +1,59 @@
+<!-- <mat-toolbar color="primary" style="font-family: 'Times New Roman', Times, serif;font-size: 25px; font-size: 30px;">
+    Personal Finance Management
+  </mat-toolbar> -->
+<mat-card style="background-color: aliceblue;">
+    <div class="container" style="margin-top: 20px;">
+        <div>
+            <div class="panel-heading" *ngIf="showUploadOrDownload">
+                <h2>Upload Files</h2>
+            </div>
+            <div class="panel-heading" *ngIf="!showUploadOrDownload">
+                <h2>Download Files</h2>
+            </div>
+            <div>
+                <div *ngIf="showUploadOrDownload">
+                    <strong>Select files from your computer</strong>
+                </div>
+                <div *ngIf="fileStatus.status==='progress'">
+                    <div class="progress">
+                        <div [style.width.%]="fileStatus.percent"
+                            role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                            {{ fileStatus.requestType }} {{ fileStatus.percent }}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <form enctype="multipart/form-data" *ngIf="showUploadOrDownload">
+                    <fieldset>
+                        <div class="form-group">
+                            <div>
+                                <input type="file" (change)="onUploadFiles($event.target.files)" name="files" multiple
+                                    class="form-control" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <br>
+                <button style="background-color: aqua;" *ngIf="filenames.length > 0" mat-raised-button (click)="close()">Done</button>
+
+                <br>
+
+                <div *ngIf="!showUploadOrDownload">
+                    <h2 *ngIf="showNoFilesUploaded">No Files Uploaded for this Transction</h2>
+                    <h3 *ngIf="!showNoFilesUploaded">Processed files</h3>
+                    <div *ngFor="let filename of fileNames">
+                        <a (click)="onDownloadFile(filename.fileName, filename.originalFileName)" class="list-group-item list-group-item-success"
+                            style="cursor: pointer;">
+                            {{ filename.originalFileName }}
+                            <a class="alert-success float-right">Download</a>
+                        </a><br>
+                    </div>
+                    <br>
+                    <button style="background-color: aqua;margin-left: 70%;" mat-raised-button (click)="close()">Done</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</mat-card>
