@@ -39,14 +39,13 @@
     min-width: 120px;
   }
   mat-card {
-    justify-content: center;
-    margin: 100px 0px;
+    /* justify-content: center; */
     background:rgb(243, 209, 214);
     font-family: 'Serif', Georgia, monospace;
     /* width: 110%; */
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 7%;
+    margin-top: 6%;
   }
 
 nav {

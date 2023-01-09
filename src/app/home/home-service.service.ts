@@ -35,6 +35,9 @@ export class HomeServiceService {
   getListOfExpenseTo():Observable<object>{
     return this._http.get(`${this.baseUrl}/expenseTo/`+this.service2.getGlobalHomeId());
   }
+  getDataBetweenDates(homeId: number,fromDate: Date, toDate: Date): Observable<object> {
+    return this._http.get(`${this.baseUrl}/expenses/${homeId}/${fromDate}/${toDate}`);
+  }
 
   getHomeAssignedToDetails(id: any): Observable<object> {
     return this._http.get(`${this.baseUrl}/assignedTo/`+id);
@@ -69,4 +72,8 @@ export class HomeServiceService {
   // deleteHomeByHomeId(id: number): Observable<String>{
   //   this._http.delete(`${this.baseUrl}/delete/`+id);
   // }
+
+  getExpensesByYear(year: any): Observable<any> {
+    return this._http.get(`${this.baseUrl}/expensess/${this.service2.getGlobalHomeId()}/${year}`)
+  }
 }

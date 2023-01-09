@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserAuthService } from 'src/app/authfiles/user-auth.service';
-import { HomeServiceService } from 'src/app/dashboard/home-service.service';
+import { HomeServiceService } from 'src/app/home/home-service.service';
 import { RegistrationService } from 'src/app/registration.service';
 import { SharedserviceService } from 'src/app/sharedservice.service';
 import { User } from 'src/app/user';
@@ -81,12 +81,12 @@ export class LoginComponent implements OnInit {
   navToDashboard(id: number) {
     // this._service.getAllHomesByUserId(this.service2.shareduser).subscribe(data => {
     //   if (data == null){
-    //     this.route.navigate(['dashboard/createhome']);
+    //     this.route.navigate(['homes/createhome']);
     //     console.log(data)
         
     //   }
     //   else{
-    //     this.route.navigate(['dashboard/gethomes']);
+    //     this.route.navigate(['homes']);
     //     console.log(data)
     //     this.service2.sharedhome = data;
     //   }
@@ -95,11 +95,11 @@ export class LoginComponent implements OnInit {
     this.homeservice.getAllHomesByUserId().subscribe( data =>{
       this.x = data;
       if (this.x[0]==null){
-        this.route.navigate(['dashboard/createhome',this.service2.getGlobalUserId()]);
+        this.route.navigate(['homes/Createhome']);
         this.service2.showCreateHomeMessage = true;
       }
       else{
-        this.route.navigate(['/gethomes']);
+        this.route.navigate(['/homes']);
       }
     }
     )

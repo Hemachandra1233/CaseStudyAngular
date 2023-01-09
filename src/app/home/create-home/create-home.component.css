@@ -7,6 +7,14 @@
     margin: 100px 0px;
   } */
 
+  .mat-toolbar {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 6.5rem;
+    width: 100%;
+    background-color: rgb(179, 85, 172);
+  }
   .mat-form-field {
     width: 100%;
     min-width: 300px;

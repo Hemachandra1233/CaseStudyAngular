@@ -5,10 +5,10 @@ import { NgConfirmService } from 'ng-confirm-box';
 import { ToastrService } from 'ngx-toastr';
 import { UserAuthService } from 'src/app/authfiles/user-auth.service';
 import { AssignUserRoleComponent } from 'src/app/home-entry/assign-user-role/assign-user-role.component';
+import { PopupComponent } from 'src/app/popup/popup.component';
 import { SharedserviceService } from 'src/app/sharedservice.service';
 import { CreateHomeComponent } from '../create-home/create-home.component';
 import { HomeServiceService } from '../home-service.service';
-import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-get-homes',
@@ -76,14 +76,14 @@ export class GetHomesComponent implements OnInit {
     this.service2.setUpdateDescription(description);
     this.service2.setGlobalHomeId(id);
     this.service2.updateHomeId = id;
-    this.dialogRef.open(CreateHomeComponent);
-    // this.router.navigate(['/dashboard/updatehome',id]);
+    // this.dialogRef.open(CreateHomeComponent);
+    this.router.navigate(['/homes/updatehome',id]);
   }
 
   openCreateHome() {
     // this.dialogRef.open(CreateHomeComponent);
     // this.ngOnInit();
-    this.router.navigate(['/dashboard/createhome'])
+    this.router.navigate(['/homes/Createhome'])
   }
   onDelete(id: number, msg: string){
 
@@ -109,28 +109,28 @@ export class GetHomesComponent implements OnInit {
     });
   }
 
-  ondelete(id : number, home: any) {
+  // ondelete(id : number, home: any) {
     
-    this.confirmService.showConfirm("Are you sure",
-     () => {
-      this.service.deleteHomebyHomeId(id).subscribe((data: any) => {
-        console.log(data);
-        this.ngOnInit();
-        this.toastr.success('Deleted Successfully', 'Message',{
-          timeOut: 2000
-        })
-      })
-    },
-    () => {
-      console.log("Selected No")
-    })
-  }
+  //   this.confirmService.showConfirm("Are you sure",
+  //    () => {
+  //     this.service.deleteHomebyHomeId(id).subscribe((data: any) => {
+  //       console.log(data);
+  //       this.ngOnInit();
+  //       this.toastr.success('Deleted Successfully', 'Message',{
+  //         timeOut: 2000
+  //       })
+  //     })
+  //   },
+  //   () => {
+  //     console.log("Selected No")
+  //   })
+  // }
   assignHome(id : any) {
     this.service2.setGlobalHomeId(id);
     this.service2.globalRoleChangeEmail = undefined;
     this.service2.globalUpdateRole = undefined;
     this.dialogRef.open(AssignUserRoleComponent);
-    console.log("Home Id" , this.service2.getGlobalHomeId())
+    console.log("Home Id assigneeeeeeeeeee" , this.service2.getGlobalHomeId())
   }
 
   assignedToHomes: any;

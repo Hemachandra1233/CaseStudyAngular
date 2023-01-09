@@ -1,6 +1,6 @@
 import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { PopupComponent } from 'src/app/dashboard/popup/popup.component';
+import { PopupComponent } from 'src/app/popup/popup.component';
 import { SharedserviceService } from 'src/app/sharedservice.service';
 import { Transaction } from 'src/app/transaction';
 import { ExpenseEntryService } from '../expense-entry.service';
@@ -10,7 +10,8 @@ import { formatDate, Time } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileComponent } from '../file/file.component';
 import { ToastrService } from 'ngx-toastr';
-import { HomeServiceService } from 'src/app/dashboard/home-service.service';
+import { HomeServiceService } from 'src/app/home/home-service.service';
+
 
 @Component({
   selector: 'app-expenses',
@@ -172,7 +173,6 @@ export class ExpensesComponent implements OnInit {
   }
 
   expenseEntry() {
-    this.showDocuments = true
     // this.transaction.transactionTime = this.Time?.value
     // console.log("type of entered time is",  this.transaction.transactionTime);
     this.transaction.transactionDate = this.Date?.value
@@ -186,6 +186,7 @@ export class ExpensesComponent implements OnInit {
 
 
     this._service.expenseEntry(this.transaction).subscribe((data : any) => {
+      this.showDocuments = true
       console.log("Entered Expense Data", data.transactionId);
       this.service2.setFileTransactionId(data.transactionId)
       console.log("service got data", this.service2.getFileTransactionId());
@@ -193,6 +194,7 @@ export class ExpensesComponent implements OnInit {
         timeOut: 2000
       })
       this.myForm.resetForm();
+      //----------
       // this.form.markAsUntouched();
       // this.ngOnInit();
 
@@ -213,9 +215,9 @@ export class ExpensesComponent implements OnInit {
 
       // this.form = new FormGroup({
       //   transactionDate: new FormControl(expenseDate, [Validators.required]),
-      //   description: new FormControl('', [Validators.required]),
-      //   amount: new FormControl('', [Validators.required]),
-      //   createdBy: new FormControl('', [Validators.required]),
+      //   description: new FormControl(null, [Validators.required]),
+      //   amount: new FormControl(null, [Validators.required]),
+      //   createdBy: new FormControl(null, [Validators.required]),
       //   categoryId: new FormControl(this.createdCatId,[Validators.required]),
       //   spendTypeId: new FormControl(this.loadSpendType, [Validators.required]),
       //   expenseTo: new FormControl(this.service2.getGlobalUserName(),[Validators.required]),
@@ -267,13 +269,16 @@ export class ExpensesComponent implements OnInit {
       this.toastr.success("Updated Successfully","Message",{
         timeOut: 2000
       });
+      this.route.navigate(['/dashboard/get-expenses'])
     });
 
   }
 
   navtoFileUpload(){
     this.service2.setFile("true");
-    this.dialogRef.open(FileComponent);
+    this.dialogRef.open(FileComponent,{
+      width: "60%"
+    });
     // this.route.navigate(['/expenses/file']);
   }
 
@@ -298,6 +303,4 @@ export class ExpensesComponent implements OnInit {
     })
   }
 }
-
-
-
+// setFileTransactionId

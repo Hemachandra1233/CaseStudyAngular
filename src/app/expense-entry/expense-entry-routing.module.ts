@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../authfiles/auth.guard';
+import { DashboardComponent } from '../dashboard/dashboard/dashboard.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { FileComponent } from './file/file.component';
 import { UpdateExpenseComponent } from './update-expense/update-expense.component';
@@ -7,20 +9,18 @@ import { UpdateExpenseComponent } from './update-expense/update-expense.componen
 const routes: Routes = [
 
   // {
-  //   path: 'expenses', component: ExpensesComponent,
+  //   path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard],
   //   children:[
+  //     { path: 'expenses', component: ExpensesComponent },
   //     { path: 'update-expense/:id', component: ExpensesComponent},
   //     { path: 'file', component: FileComponent}
   //   ] 
   // },
-  { path: '', component: ExpensesComponent },
-  { path: 'update-expense/:id', component: ExpensesComponent},
-  { path: 'file', component: FileComponent}
+  // { path: '', component: ExpensesComponent },
+  // { path: 'update-expense/:id', component: ExpensesComponent},
+  // { path: 'file', component: FileComponent}
 ];
-//   { path: 'dashboard', component: DashboardComponent, children:[
-//   { path: 'gethomes', component: GetHomesComponent },
-//   { path: 'createhome', component: CreateHomeComponent }
-// ] }];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

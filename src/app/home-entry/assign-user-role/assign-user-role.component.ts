@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { HomeServiceService } from 'src/app/dashboard/home-service.service';
 import { RoleAssignRequest } from 'src/app/role-assign-request';
 import { SharedserviceService } from 'src/app/sharedservice.service';
 import { HomeEntryService } from '../home-entry.service';
@@ -26,8 +25,7 @@ export class AssignUserRoleComponent implements OnInit {
   constructor(private service2: SharedserviceService,
     private service: HomeEntryService,
     private dialogRef: MatDialog,
-    private toastr: ToastrService,
-    private _service: HomeServiceService) { }
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // console.log("checking", this.service2.updateRoleId)

@@ -49,7 +49,10 @@ export class CreateHomeComponent implements OnInit {
     // this.service2.updateHomeId = undefined
     console.log("Update home id",this.service2.updateHomeId)
     console.log(this.service2.getUpdateDescription())
-    this.updateId = this.service2.updateHomeId
+    this.id = this.router.snapshot.params['id']
+    // this.updateId = this.service2.updateHomeId
+    console.log("Update idddddddddddddddddddddddd", this.id);
+    this.updateId = this.id
     if (this.updateId !== undefined){
       this.showUpdate = true
       this.form = new FormGroup({
@@ -72,6 +75,7 @@ export class CreateHomeComponent implements OnInit {
     this.home.createdBy = this.service2.getGlobalUserName();
 
     this._service.createhomeByUserId(this.home).subscribe(data => {
+      this.service2.showCreateHomeMessage = false
       this.toastr.success('Home Created Successfully', 'Message', {
         timeOut: 2000,
       });
@@ -83,7 +87,7 @@ export class CreateHomeComponent implements OnInit {
       // if (this.dialogRef.afterAllClosed) {
       //   window.location.reload()
       // }
-      this.route.navigate(['/gethomes'])
+      this.route.navigate(['/homes'])
     }, (error) => {
       this.toastr.error(error.message, 'Message', {
         timeOut: 3000,
@@ -109,8 +113,8 @@ export class CreateHomeComponent implements OnInit {
         });
         console.log(data);
         this.service2.updateHomeId = undefined;
-        this.dialogRef.closeAll();
-        // this.route.navigate(['/gethomes'])
+        // this.dialogRef.closeAll();
+        this.route.navigate(['/homes'])
       })
     // window.location.reload();
     }

@@ -3,9 +3,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Home } from 'src/app/home';
 import { AssignUserRoleComponent } from 'src/app/home-entry/assign-user-role/assign-user-role.component';
+import { HomeServiceService } from 'src/app/home/home-service.service';
 import { ImpersonationService } from 'src/app/impersonation/impersonation.service';
 import { SharedserviceService } from 'src/app/sharedservice.service';
-import { HomeServiceService } from '../home-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,20 +45,9 @@ export class DashboardComponent implements OnInit {
     // this._service.createhomeByUserId(this.id,this.home).subscribe(data => {
     //   alert("submitted")
     // },error => alert("sorry"));
-    this.route.navigate(["/dashboard/createhome/"])
+    this.route.navigate(["/homes/Createhome/"])
   }
-
-  changeLink(){
-    if(this.link == "/dashboard/view-expenses" && this.name == "Graph"){
-      this.link = "/dashboard/get-expenses";
-      this.name = "Table"
-    }
-    else{
-      this.link = "/dashboard/view-expenses";
-      this.name = "Graph";
-    }
-  }
-
+  
   showNoHomes: any;
   assignedToHomes:any;
   disableUpdateRole: any;
@@ -136,6 +125,6 @@ export class DashboardComponent implements OnInit {
       }
       this.service2.setGlobalExpenseTo(JSON.stringify(list))
     })
-    this.route.navigate(['/expenses']);
+    this.route.navigate(['dashboard/expenses']);
   }
 }

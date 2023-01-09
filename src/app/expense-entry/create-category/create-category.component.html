@@ -19,7 +19,7 @@
                 </p> -->
 
                 <div class="button">
-                    <button type="submit" style="background-color: aqua;" mat-raised-button (click)="CreateCat()">Submit</button>
+                    <button type="submit" [disabled]="form.invalid" style="background-color: aqua;" mat-raised-button (click)="CreateCat()">Submit</button>
                 </div>
             </form>
 

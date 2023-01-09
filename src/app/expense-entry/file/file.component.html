@@ -2,16 +2,19 @@
     Personal Finance Management
   </mat-toolbar> -->
 <mat-card style="background-color: aliceblue;">
-    <div class="container" style="margin-top: 20px;">
+    <!-- class="container" -->
+    <div  style="margin-top: 20px;">
         <div>
-            <div class="panel-heading" *ngIf="showUploadOrDownload">
-                <h2>Upload Files</h2>
+            <!-- *ngIf="showUploadOrDownload" -->
+            <div class="panel-heading">
+                <h2>Upload And Download Files</h2>
             </div>
-            <div class="panel-heading" *ngIf="!showUploadOrDownload">
+            <!-- <div class="panel-heading" *ngIf="!showUploadOrDownload">
                 <h2>Download Files</h2>
-            </div>
+            </div> -->
             <div>
-                <div *ngIf="showUploadOrDownload">
+                <!-- *ngIf="showUploadOrDownload" -->
+                <div>
                     <strong>Select files from your computer</strong>
                 </div>
                 <div *ngIf="fileStatus.status==='progress'">
@@ -23,8 +26,8 @@
                     </div>
                 </div>
                 <hr>
-
-                <form enctype="multipart/form-data" *ngIf="showUploadOrDownload">
+                <!-- *ngIf="showUploadOrDownload" -->
+                <form enctype="multipart/form-data">
                     <fieldset>
                         <div class="form-group">
                             <div>
@@ -38,12 +41,12 @@
                 <button style="background-color: aqua;" *ngIf="filenames.length > 0" mat-raised-button (click)="close()">Done</button>
 
                 <br>
-
-                <div *ngIf="!showUploadOrDownload">
-                    <h2 *ngIf="showNoFilesUploaded">No Files Uploaded for this Transction</h2>
+                <!-- *ngIf="!showUploadOrDownload" -->
+                <div >
+                    <h2 *ngIf="showNoFilesUploaded">No Files Uploaded for this Transaction</h2>
                     <h3 *ngIf="!showNoFilesUploaded">Processed files</h3>
                     <div *ngFor="let filename of fileNames">
-                        <a (click)="onDownloadFile(filename.fileName, filename.originalFileName)" class="list-group-item list-group-item-success"
+                        <a (click)="onDownloadFile(filename.fileName, filename.originalFileName)"
                             style="cursor: pointer;">
                             {{ filename.originalFileName }}
                             <a class="alert-success float-right">Download</a>

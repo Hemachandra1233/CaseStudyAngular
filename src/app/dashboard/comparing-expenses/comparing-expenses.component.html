@@ -1,0 +1,17 @@
+<!-- <p>comparing-expenses works!</p> -->
+<form style="margin-left: 20%;" [formGroup]="form">
+    <mat-form-field style="margin-left: 10%;">
+        <mat-label>Enter Year</mat-label>
+        <input matInput matInput placeholder="Enter Year" formControlName="year">
+    </mat-form-field>
+    <button mat-raised-button color="accent" style="margin-left: 2%;" (click)="submit1()">Get Data</button>
+    
+</form>
+<div>
+    <div class="graph" style="width: 50%;margin-left: 20%;margin-top: 5%;">
+        <h2 style="font-family: 'Times New Roman', Times, serif; ">
+            Comparing Expenses By Month
+        </h2>
+        <canvas id="linechart1"></canvas>
+    </div>
+</div>

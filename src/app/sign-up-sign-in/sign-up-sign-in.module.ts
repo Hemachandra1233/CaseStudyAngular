@@ -5,7 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpSignInRoutingModule } from './sign-up-sign-in-routing.module';
-import { DashboardModule } from '../dashboard/dashboard.module';
 
 
 
@@ -19,8 +18,7 @@ import { DashboardModule } from '../dashboard/dashboard.module';
     SignUpSignInRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule,
-    DashboardModule
+    ReactiveFormsModule
   ]
 })
 export class SignUpSignInModule { }

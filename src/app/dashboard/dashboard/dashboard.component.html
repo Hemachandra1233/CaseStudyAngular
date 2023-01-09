@@ -7,7 +7,7 @@
         <button (click)="createHome()" mat-button
             style="color: red; background-color: rgb(249, 234, 248); margin-right: 0.2%; font-size: 12px;">Add
             Home</button>
-        <button routerLink="/gethomes" mat-raised-button
+        <button routerLink="/homes" mat-raised-button
             style="color: red; background-color: rgb(249, 234, 248); margin-right: 0.2%;font-size: 12px;">Go to
             Homes</button>
         <button (click)="navToExpenseEntry()" mat-raised-button
@@ -30,26 +30,33 @@
 
 <nav class="navbar navbar-default">
     <div class="container-fluid" style="margin-top: 1%;">
-        <div class="navbar-header">
+        <div class="navbar-header"  routerLink="/dashboard/view-expenses">
             <p class="my" style="margin-top: 5%;">Personal Finance Management</p>
         </div>
-        <ul class="nav navbar-nav" style="margin-left: 10%;">
-            <li class="myLink"><a (click)="createHome()" style="color: rgb(254, 254, 254); cursor: pointer;">Add Home</a></li>
-            <li><a routerLink="/gethomes" style="color: rgb(254, 254, 254); cursor: pointer;">Go To Homes</a></li>
+        <ul class="nav navbar-nav" style="margin-left: 30%;">
+            <li>
+                <a routerLink="/dashboard/view-expenses" style="color: rgb(254, 254, 254);cursor: pointer;">
+                    Dashboard
+                </a>
+            </li>
             <li><a (click)="navToExpenseEntry()" *ngIf="views" style="color: rgb(254, 254, 254); cursor: pointer;">Enter Expense</a>
             </li>
-            <li><a routerLink="/dashboard/get-expenses" style="color: rgb(254, 254, 254);">View in Table</a></li>
-            <li><a routerLink="/dashboard/view-expenses" style="color: rgb(254, 254, 254);cursor: pointer;">View in
-                    Graph</a></li>
-            <li><a style="color: rgb(254, 254, 254);cursor: pointer;" (click)="getAssignedHomes()"
+            <li>
+                <a routerLink="/dashboard/get-expenses" style="color: rgb(254, 254, 254);">Expenses</a>
+            </li>
+            <li><a routerLink="/homes" style="color: rgb(254, 254, 254); cursor: pointer;">Homes</a></li>
+            <li><a routerLink="/dashboard/compare" style="color: rgb(254, 254, 254); cursor: pointer;">Yearly Report</a></li>
+            <!-- <li class="myLink"><a (click)="createHome()" style="color: rgb(254, 254, 254); cursor: pointer;">Add Home</a></li> -->
+            <!-- <li><a style="color: rgb(254, 254, 254);cursor: pointer;" (click)="getAssignedHomes()"
                     [matMenuTriggerFor]="menu2">Your Assigned Homes</a></li>
+                    
             <mat-menu #menu2="matMenu">
                 <p *ngIf="showNoHomes2" style="font-family: 'Times New Roman', Times, serif; color: rgb(72, 2, 11);">
                     No Homes Assigned to You
                 </p>
                 <button mat-menu-item *ngFor="let x of assignedHomes"
                     (click)="getExpensesByHomeId(x.id, x.description)">{{x.description}}</button>
-            </mat-menu>
+            </mat-menu> -->
         </ul>
     </div>
 </nav>

@@ -1,0 +1,30 @@
+<!-- <mat-toolbar color="primary" style="font-family: 'Times New Roman', Times, serif;font-size: 25px;">
+    Personal Finance Management -->
+
+    <!-- <button (click)="openCreateHome()" mat-button
+        style="color: red; background-color: rgb(252, 232, 252); margin-right: 0.2%; font-size: 12px;">Create New
+        Home</button> -->
+
+        <!-- <li>
+            <a (click)="openCreateHome()" style="color: rgb(254, 254, 254);cursor: pointer;">
+                Dashboard
+            </a>
+        </li>
+</mat-toolbar> -->
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid" style="margin-top: 1%;">
+        <div class="navbar-header"  routerLink="/dashboard/view-expenses">
+            <p class="my" style="margin-top: 5%;">Personal Finance Management</p>
+        </div>
+        <ul class="nav navbar-nav" style="margin-left: 55%;">
+            <li>
+                <a routerLink="/homes/Createhome" style="color: rgb(254, 254, 254);cursor: pointer;">
+                    Create Home
+                </a>
+            </li>
+            <li><a routerLink="/homes" style="color: rgb(254, 254, 254); cursor: pointer;">Homes</a></li>
+        </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>

@@ -12,13 +12,13 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { LoggingInterceptorInterceptor } from './logging-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import {NgConfirmModule} from 'ng-confirm-box';
-// import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
-
-// var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
+import { PopupComponent } from './popup/popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +29,7 @@ import {NgConfirmModule} from 'ng-confirm-box';
     NgConfirmModule,
     HttpClientModule,
     ChartModule,
+    MatDialogModule,
     ToastrModule.forRoot({ positionClass: 'toast-top-center' })
   ],
   providers: [

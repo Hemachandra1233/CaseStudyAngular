@@ -10,10 +10,10 @@ import { ToastrService } from 'ngx-toastr';
 import { ExpenseEntryService } from 'src/app/expense-entry/expense-entry.service';
 import { FileComponent } from 'src/app/expense-entry/file/file.component';
 import { AssignUserRoleComponent } from 'src/app/home-entry/assign-user-role/assign-user-role.component';
+import { HomeServiceService } from 'src/app/home/home-service.service';
 import { ImpersonationService } from 'src/app/impersonation/impersonation.service';
 import { SharedserviceService } from 'src/app/sharedservice.service';
-import { HomeServiceService } from '../home-service.service';
-import { PopupComponent } from '../popup/popup.component';
+import { PopupComponent } from '../../popup/popup.component';
 
 
 export interface UserData {
@@ -62,41 +62,51 @@ export class GetExpenseComponent implements OnInit {
       this.views = false
     }
     // this.service2.globalHomeId = this.route.snapshot.params['id'];
-    this.service.getExpensesByHomeId(this.service2.getGlobalHomeId()).subscribe((data: any) => {
-      this.showAmount = 0
-      this.service2.globalExpense = []
-      this.expense2 = []
-      this.createdTime = []
-      this.updatedTime = []
-      this.expense = new MatTableDataSource();
-      for (let i = 0; i < data.length; i++) {
-        let date2 = formatDate(data[i].transactionDate, 'yyyy-MM-dd', 'en_US');
-        if (this.startDate <= date2 && this.endDate >= date2) {
+    //Previously used
+    this.service.getExpensesByHomeId(this.service2.getGlobalHomeId()).subscribe(data => {
+      console.log("Got between Datesssssss csunnn", data);
+      // getExpensesByHomeId(this.service2.getGlobalHomeId())
+    })
+    // changed between dates
+    if (this.startDate > this.endDate) {
+      this.toastr.warning('Start Date Should Be Less Than End Date', 'Message', {
+        timeOut: 2000,
+      });
+    }
+    else {
+      this.service.getDataBetweenDates(this.service2.getGlobalHomeId(), this.startDate, this.endDate).subscribe((data: any) => {
+        this.showAmount = 0
+        this.service2.globalExpense = []
+        this.expense2 = []
+        this.createdTime = []
+        this.updatedTime = []
+        this.expense = new MatTableDataSource();
+        for (let i = 0; i < data.length; i++) {
           this.expense.data.push(data[i]);
           this.expense2.push(data[i])
           this.service2.globalExpense.push(data[i])
-          this.createdOnDict[data[i].transactionId]=formatDate(data[i].createdOn, 'yyyy-MM-dd', 'en_US')
-          this.updatedOnDict[data[i].transactionId]=formatDate(data[i].updatedOn, 'yyyy-MM-dd', 'en_US')
+          this.createdOnDict[data[i].transactionId] = formatDate(data[i].createdOn, 'yyyy-MM-dd', 'en_US')
+          this.updatedOnDict[data[i].transactionId] = formatDate(data[i].updatedOn, 'yyyy-MM-dd', 'en_US')
           this.createdTime.push(data[i].createdOnTime.trim());
-          this.updatedTime.push(data[i].updatedOnTime.trim());
+          this.updatedTime.push(data[i].updatedOnTime.trim());         
         }
-      }
-      console.log("expense 2", this.expense2)
-      console.log("push data ==> ", this.service2.globalExpense.length);
-      this.service2.setGlobalExpense(JSON.stringify(this.service2.globalExpense));
-      // console.log("Global Expense" , this.service2.getGlobalExpense());
+        console.log("expense 2", this.expense2)
+        console.log("push data ==> ", this.service2.globalExpense.length);
+        this.service2.setGlobalExpense(JSON.stringify(this.service2.globalExpense));
+        // console.log("Global Expense" , this.service2.getGlobalExpense());
 
-      // this.expense2 = data;
-      // this.service2.globalExpense = data;
-      this.expense.paginator = this.paginator;
-      this.expense.sort = this.matSort;
-
-      this.expense2.forEach((element: any) => {
-        if (element.spendType.type == "Expense") {
-          this.showAmount = this.showAmount + element.amount;
-        }
-      });
-    })
+        // this.expense2 = data;
+        // this.service2.globalExpense = data;
+        this.expense.paginator = this.paginator;
+        this.expense.sort = this.matSort;
+        this.expense.filterPredicate = this.filterByCategory();
+        this.expense2.forEach((element: any) => {
+          if (element.spendType.type == "Expense") {
+            this.showAmount = this.showAmount + element.amount;
+          }
+        });
+      })
+    }
   }
   id!: number;
   showNoHomes = false
@@ -112,14 +122,14 @@ export class GetExpenseComponent implements OnInit {
   chart: any;
   Categories: any;
   // 'Created Time','Updated Time',
-  displayedColumns: string[] = ['transactionDate', 'amount', 'Category','description', 'spendType', 'Expense To', 'Created By', 'Created On','Updated On','Actions'];
+  displayedColumns: string[] = ['transactionDate', 'amount', 'Category', 'description', 'spendType', 'Expense To', 'Created By', 'Created On', 'Updated On', 'Actions'];
   assignedHomes!: any;
   CreatedOn: any;
   updatedOn: any;
   createdTime: any;
   updatedTime: any;
-  createdOnDict: any={};
-  updatedOnDict: any={};
+  createdOnDict: any = {};
+  updatedOnDict: any = {};
 
 
   @ViewChild('paginator') paginator!: MatPaginator;
@@ -171,7 +181,8 @@ export class GetExpenseComponent implements OnInit {
     this.CreatedOn = []
     this.createdTime = []
     this.updatedTime = []
-    this.service.getExpensesByHomeId(this.service2.getGlobalHomeId()).subscribe((data: any) => {
+    //changed between dates
+    this.service.getDataBetweenDates(this.service2.getGlobalHomeId(), this.startDate, this.endDate).subscribe((data: any) => {
       this.service2.globalExpense = []
       this.expense = new MatTableDataSource();
       for (let i = 0; i < data.length; i++) {
@@ -181,8 +192,8 @@ export class GetExpenseComponent implements OnInit {
           this.expense.data.push(data[i]);
           this.service2.globalExpense.push(data[i])
           console.log(data[i].transactionId)
-          this.createdOnDict[data[i].transactionId]=formatDate(data[i].createdOn, 'yyyy-MM-dd', 'en_US')
-          this.updatedOnDict[data[i].transactionId]=formatDate(data[i].updatedOn, 'yyyy-MM-dd', 'en_US')
+          this.createdOnDict[data[i].transactionId] = formatDate(data[i].createdOn, 'yyyy-MM-dd', 'en_US')
+          this.updatedOnDict[data[i].transactionId] = formatDate(data[i].updatedOn, 'yyyy-MM-dd', 'en_US')
           this.CreatedOn.push(formatDate(data[i].createdOn, 'yyyy-MM-dd', 'en_US'))
           this.createdTime.push(data[i].createdOnTime.trim());
           this.updatedTime.push(data[i].updatedOnTime.trim())
@@ -272,7 +283,7 @@ export class GetExpenseComponent implements OnInit {
 
   navToUpdateExpense(id: number) {
     this.service2.setShowExpenseHeading("true");
-    this.router.navigate(['/expenses/update-expense', id]);
+    this.router.navigate(['/dashboard/update-expense', id]);
   }
 
   assignHome() {
@@ -281,20 +292,58 @@ export class GetExpenseComponent implements OnInit {
     this.dialogRef.open(AssignUserRoleComponent);
   }
 
-  deleteExpense(id: number) {
-    console.log("deleting", id)
-    this.service.deleteExpenseByTransactionId(id).subscribe(data => {
-      console.log(data);
-      this.toastr.success('Deleted Successfully', 'Message',{
-        timeOut: 2000
-      })
-      if (this.service2.getglobalendDate() && this.service2.getGlobalStartDate() !== null) {
-        this.submit();
+  // onDelete(id: number, msg: string){
+
+  //   this.dialogRef.open(PopupComponent,{
+  //     width: '390px',
+  //     panelClass: 'confirm-dialog-container',
+  //     disableClose: true,
+  //     position: { top: "10px" },
+  //     data :{
+  //       message : 'Are you sure to delete ' + msg + ' ?'
+  //     }
+  //   }).afterClosed().subscribe(res => {
+  //     console.log(res);
+  //     if(res) {
+  //       this.service.deleteHomebyHomeId(id).subscribe((data: any) => {
+  //         console.log(data);
+  //         this.ngOnInit();
+  //         this.toastr.success('Deleted Successfully', 'Message',{
+  //           timeOut: 2000
+  //         })
+  //       })
+  //     }
+  //   });
+  // }
+
+  deleteExpense(id: number, msg: string, msg2: string) {
+    this.dialogRef.open(PopupComponent,{
+      width: '390px',
+      panelClass: 'confirm-dialog-container',
+      disableClose: true,
+      position: { top: "10px" },
+      data :{
+        message : 'Are you sure to delete ' + msg +' ' + msg2 +' ?'
       }
-      else {
-        this.ngOnInit();
+    }).afterClosed().subscribe(res => {
+      console.log(res);
+      if(res) {
+        console.log("deleting", id)
+        this.service.deleteExpenseByTransactionId(id).subscribe(data => {
+          console.log(data);
+          this.toastr.success('Deleted Successfully', 'Message', {
+            timeOut: 2000
+          })
+          if (this.service2.getglobalendDate() && this.service2.getGlobalStartDate() !== null) {
+            this.submit();
+          }
+          else {
+            this.ngOnInit();
+          }
+        })
       }
-    })
+    });
+  
   }
   getAssignedHomes() {
     this.service3.getAllHomesByAssigneeId().subscribe(data => {
@@ -317,14 +366,32 @@ export class GetExpenseComponent implements OnInit {
     })
   }
 
-  downloadDocuments(id: any) {
+  // downloadDocuments1(id: any) {
+  //   console.log("downloaded successfully -->", id)
+  //   this.service2.setFileTransactionId(id);
+  //   this.service2.setFile("false");
+  //   this.dialogRef.open(FileComponent, {
+  //     width: 50%,
+  //   });
+  // }
+
+  downloadDocuments(id: any){
     console.log("downloaded successfully -->", id)
     this.service2.setFileTransactionId(id);
     this.service2.setFile("false");
-    this.dialogRef.open(FileComponent);
+
+    this.dialogRef.open(FileComponent,{
+      width: '60%'
+    });
   }
 
-  navtoFileDownload(){
-    
+  // this.dialogRef.open(PopupComponent,{
+  //   width: '390px',
+  //   panelClass: 'confirm-dialog-container',
+  //   disableClose: true,
+  //   position: { top: "10px" },
+  //   da
+  navtoFileDownload() {
+
   }
 }

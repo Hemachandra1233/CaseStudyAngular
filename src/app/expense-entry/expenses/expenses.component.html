@@ -3,7 +3,7 @@
 
   <div>
     <button mat-button style="color: red; background-color: aliceblue;">Add Home</button>
-    <button routerLink="/gethomes" mat-raised-button
+    <button routerLink="/homes" mat-raised-button
       style="color: red; margin-left: 0.2%; background-color: aliceblue;">Go to Homes</button>
     <button mat-button style="color: red; background-color: aliceblue; margin-left: 0.2%;"
       (click)="navtoFileUpload()">Upload Document of Expense</button>
@@ -12,23 +12,24 @@
   </div>
 </mat-toolbar> -->
 
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid" style="margin-top: 1%;">
     <div class="navbar-header">
       <a class="navbar-brand my">Personal Finance Management</a>
     </div>
-    <ul class="nav navbar-nav" style="margin-left: 20%;">
-      <li><a routerLink="/gethomes" style="color: rgb(254, 254, 254); cursor: pointer;">Add Home</a></li>
-      <li><a routerLink="/dashboard/view-expenses" style="color: rgb(254, 254, 254); cursor: pointer;">Go To
+    <ul class="nav navbar-nav" style="margin-left: 25%;">
+      <li><a routerLink="/homes" style="color: rgb(254, 254, 254); cursor: pointer;">Add Home</a></li>
+      <li><a routerLink="/dashboard/view-expenses" style="color: rgb(254, 254, 254); cursor: pointer;">
           Dashboard</a></li>
       <li><a routerLink="/dashboard/get-expenses" style="color: rgb(254, 254, 254);">View in Table</a></li>
-      <li><a routerLink="/gethomes" style="color: rgb(254, 254, 254); cursor: pointer;">Go to Homes</a></li>
+      <li><a routerLink="/homes" style="color: rgb(254, 254, 254); cursor: pointer;">Go to Homes</a></li>
       <li><a *ngIf="showUpdateButton" (click)="navtoFileUpload()" style="color: rgb(254, 254, 254); cursor: pointer;">Upload Documents</a></li>
     </ul>
   </div>
-</nav>
+</nav> -->
 
 <div>
+
   <mat-card>
     <mat-card-title *ngIf="!showUpdateButton" style="font-family: 'Times New Roman', Times, serif;">Expense Entry
     </mat-card-title>
@@ -54,10 +55,7 @@
               <div style="display: flex;">
                 <mat-form-field appearance="fill" style="margin-left: 5%;">
                   <mat-label>Choose a Category</mat-label>
-                  <mat-select matNativeControl formControlName="categoryId">
-                    <!-- <mat-option>
-                      <button mat-button (click)="createCategory()">Add Category</button>
-                    </mat-option> -->
+                  <mat-select matNativeControl formControlName="categoryId"> 
                     <mat-option [value]="cat.id" *ngFor="let cat of Categories">
                       {{cat.description}}
                     </mat-option>
@@ -142,18 +140,24 @@
                 (click)="updateExpense()">Update</button>
               <!-- <button style=" margin-left: 20%;" type="submit" mat-raised-button
                 routerLink="/dashboard/view-expenses">Go To Dashboard</button>   -->
-
-                <div *ngIf="showDocuments">
-                  <button mat-raised-button style="margin-left: 2%;"
-                    (click)="navtoFileUpload()">Upload Document of Expense</button>
-                </div>
             </div>
           </div>
         </div>
       </form>
     </mat-card-content>
+    <div *ngIf="showDocuments">
+      <button mat-raised-button
+        style="margin-top: 1%;margin-left: 71%;background-color: rgb(243, 115, 134);color: aliceblue;"
+        (click)="navtoFileUpload()">Upload Bills</button>
+    </div>
   </mat-card>
+  <!-- *ngIf="showDocuments" -->
+  <!-- <div>
+    <button  mat-raised-button style="margin-top: 1%;margin-left: 71%;background-color: rgb(243, 115, 134);color: aliceblue;"
+      (click)="navtoFileUpload()">Upload Bills</button>
+  </div> -->
 </div>
+
 
 <!-- <button mat-raised-button color="primary" style="margin-left: 2%;" (click)="navtoFileDownload()">Download Documents
   of Expense</button> -->

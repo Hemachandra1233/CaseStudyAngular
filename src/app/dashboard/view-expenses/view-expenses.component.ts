@@ -5,8 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Chart } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
 import { AssignUserRoleComponent } from 'src/app/home-entry/assign-user-role/assign-user-role.component';
+import { HomeServiceService } from 'src/app/home/home-service.service';
 import { SharedserviceService } from 'src/app/sharedservice.service';
-import { HomeServiceService } from '../home-service.service';
 
 @Component({
   selector: 'app-view-expenses',
@@ -44,7 +44,7 @@ export class ViewExpensesComponent implements OnInit {
   creditAmountData: any;
   myChart2: any;
 
-  remainingAmount: any;//for showing remaining amount in credit an debit graph
+  remainingAmount: any;//for showing remaining amount in credit and debit graph
 
   b: any;
   viewHome: any;
@@ -79,13 +79,13 @@ export class ViewExpensesComponent implements OnInit {
         startDate: this.startDate,
         endDate: this.endDate
       })
-      this.service.getExpensesByHomeId(homeId).subscribe((data: any) => {
+      this.service.getDataBetweenDates(this.service2.getGlobalHomeId(),this.startDate, this.endDate).subscribe((data: any) => {
         this.expenses2 = data;
         for (let i = 0; i < data.length; i++) {
-          let date2 = formatDate(data[i].transactionDate, 'yyyy-MM-dd', 'en_US');
-          if (this.startDate <= date2 && this.endDate >= date2) {
+          // let date2 = formatDate(data[i].transactionDate, 'yyyy-MM-dd', 'en_US');
+          // if (this.startDate <= date2 && this.endDate >= date2) {
             this.expenses.push(data[i]);
-          }
+          // }
         }
         // console.log("between dates", this.expenses);
         // console.log("expense 2", this.expenses2);
@@ -217,34 +217,6 @@ export class ViewExpensesComponent implements OnInit {
     this.service2.globalAmount = 0;
     this.remainingAmount = 0;
 
-    // this.myChart.destroy();
-    // this.myChart1.destroy();
-    // this.myChart2.destroy();
-    if (this.myChart != null) {
-      this.myChart.destroy()
-    }
-    if (this.myChart2 != null) {
-      this.myChart2.destroy()
-    }
-    if (this.myChart1 != null) {
-      this.myChart1.destroy()
-    }
-    if (this.myChart4 != null) {
-      this.myChart4.destroy()
-    }
-    if (this.myChart7 != null) {
-      this.myChart7.destroy()
-    }
-    if (this.myChart8 != null) {
-      this.myChart8.destroy()
-    }
-    if (this.myChart9 != null) {
-      this.myChart9.destroy()
-    }
-    if (this.myChart10 != null) {
-      this.myChart10.destroy()
-    }
-
     this.labeldata = []
     this.amountdata = []
     this.expenseAmountData = []
@@ -259,14 +231,42 @@ export class ViewExpensesComponent implements OnInit {
       });
     }
     else {
+      if (this.myChart != null) {
+        this.myChart.destroy()
+      }
+      if (this.myChart2 != null) {
+        this.myChart2.destroy()
+      }
+      if (this.myChart1 != null) {
+        this.myChart1.destroy()
+      }
+      if (this.myChart4 != null) {
+        this.myChart4.destroy()
+      }
+      if (this.myChart7 != null) {
+        this.myChart7.destroy()
+      }
+      if (this.myChart8 != null) {
+        this.myChart8.destroy()
+      }
+      if (this.myChart9 != null) {
+        this.myChart9.destroy()
+      }
+      if (this.myChart10 != null) {
+        this.myChart10.destroy()
+      }
+  
       this.service2.setChartStartDate(this.startDate);
       this.service2.setChartEndDate(this.endDate);
-      this.service.getExpensesByHomeId(this.service2.getGlobalHomeId()).subscribe((data: any) => {
+      // this.service.getDataBetweenDates(this.startDate, this.endDate).subscribe(data => {
+      //   console.log("Got between Datesssssss", data);
+      // })
+      this.service.getDataBetweenDates(this.service2.getGlobalHomeId(),this.startDate, this.endDate).subscribe((data: any) => {
         for (let i = 0; i < data.length; i++) {
-          let date2 = formatDate(data[i].transactionDate, 'yyyy-MM-dd', 'en_US');
-          if (this.startDate <= date2 && this.endDate >= date2) {
+          // let date2 = formatDate(data[i].transactionDate, 'yyyy-MM-dd', 'en_US');
+          // if (this.startDate <= date2 && this.endDate >= date2) {
             this.expenses.push(data[i]);
-          }
+          // }
         }
         console.log("between dates", this.expenses);
         let amount = 0;

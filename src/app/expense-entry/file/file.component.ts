@@ -48,8 +48,10 @@ export class FileComponent implements OnInit {
     for (const file of files) { formData.append('files', file, file.name); }
     this.fileService.upload(formData).subscribe(
       event => {
+        this.showNoFilesUploaded = false
         console.log(event);
         this.resportProgress(event,"msg");
+        this.ngOnInit();
       },
       (error: HttpErrorResponse) => {
         console.log(error);
